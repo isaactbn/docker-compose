@@ -1,36 +1,36 @@
 version: "3.4"
 
 services:
-  project_wordpress:
+  new_project_wordpress:
     image: wordpress:5.9
     ports:
       - 8080:80
     environment:
-      WORDPRESS_DB_HOST: project_wp_db
+      WORDPRESS_DB_HOST: new_project_wp_db
       WORDPRESS_DB_USER: admin
-      WORDPRESS_DB_PASSWORD: project123
-      WORDPRESS_DB_NAME: project_db
+      WORDPRESS_DB_PASSWORD: new_project123
+      WORDPRESS_DB_NAME: new_project_db
     volumes:
       - ./www:/var/www/html
 
-  project_wp_db:
+  new_project_wp_db:
     image: mysql:5.7
     ports:
       - "8086:3306"
     environment:
-      MYSQL_DATABASE: project_db
+      MYSQL_DATABASE: new_project_db
       MYSQL_USER: admin
-      MYSQL_PASSWORD: project123
-      MYSQL_ROOT_PASSWORD: projectroot123
+      MYSQL_PASSWORD: new_project123
+      MYSQL_ROOT_PASSWORD: new_projectroot123
     volumes:
       - wp_db:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: pma
     links:
-      - project_wp_db
+      - new_project_wp_db
     environment:
-      PMA_HOST: project_wp_db
+      PMA_HOST: new_project_wp_db
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
     restart: always
